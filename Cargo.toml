@@ -10,6 +10,7 @@ repository = "https://github.com/Roughsketch/tweet"
 readme = "README.md"
 keywords = ["twitter", "api", "deserialization", "json"]
 categories = ["parsing"]
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
