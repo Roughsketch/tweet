@@ -17,4 +17,4 @@ matrix:
     - nightly
 script:
   - cargo build
-- cargo test
+  - cargo test
