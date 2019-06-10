@@ -6,6 +6,7 @@ rust:
 os:
   - linux
   - osx
+  - windows
 cache:
   cargo: true
   timeout: 900
