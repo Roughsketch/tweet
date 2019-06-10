@@ -11,214 +11,214 @@ impl FromStr for Tweet {
 }
 
 #[derive(Debug, Deserialize)]
-struct Tweet {
-    created_at: String,
-    id: u64,
-    id_str: String,
-    text: String,
-    source: String,
-    truncated: bool,
-    in_reply_to_status_id: Option<u64>,
-    in_reply_to_status_id_str: Option<String>,
-    in_reply_to_user_id: Option<u64>,
-    in_reply_to_user_id_str: Option<String>,
-    in_reply_to_screen_name: Option<String>,
-    user: User,
-    coordinates: Option<Coordinates>,
-    place: Option<Place>,
-    quoted_status_id: Option<u64>,
-    quoted_status_id_str: Option<String>,
-    is_quote_status: bool,
-    quoted_status: Box<Tweet>,
-    retweeted_status: Box<Tweet>,
-    quote_count: Option<u32>,
-    reply_count: u32,
-    retweet_count: u32,
-    favorite_count: Option<u32>,
-    entities: Option<Entity>,
-    extended_entities: Option<ExtendedEntity>,
-    favorited: Option<bool>,
-    retweeted: bool,
-    possibly_sensitive: Option<bool>,
-    filter_level: String,
-    lang: Option<String>,
+pub struct Tweet {
+    pub created_at: String,
+    pub id: u64,
+    pub id_str: String,
+    pub text: String,
+    pub source: String,
+    pub truncated: bool,
+    pub in_reply_to_status_id: Option<u64>,
+    pub in_reply_to_status_id_str: Option<String>,
+    pub in_reply_to_user_id: Option<u64>,
+    pub in_reply_to_user_id_str: Option<String>,
+    pub in_reply_to_screen_name: Option<String>,
+    pub user: User,
+    pub coordinates: Option<Coordinates>,
+    pub place: Option<Place>,
+    pub quoted_status_id: Option<u64>,
+    pub quoted_status_id_str: Option<String>,
+    pub is_quote_status: bool,
+    pub quoted_status: Option<Box<Tweet>>,
+    pub retweeted_status: Option<Box<Tweet>>,
+    pub quote_count: Option<u32>,
+    pub reply_count: u32,
+    pub retweet_count: u32,
+    pub favorite_count: Option<u32>,
+    pub entities: Option<Entity>,
+    pub extended_entities: Option<ExtendedEntity>,
+    pub favorited: Option<bool>,
+    pub retweeted: bool,
+    pub possibly_sensitive: Option<bool>,
+    pub filter_level: String,
+    pub lang: Option<String>,
     //  matching_rules: Vec<Rule>,
     //  current_user_retweet: 
     //  scopes
-    withheld_copyright: Option<bool>,
-    withheld_in_countries: Option<Vec<String>>,
-    withheld_scope: Option<String>,
+    pub withheld_copyright: Option<bool>,
+    pub withheld_in_countries: Option<Vec<String>>,
+    pub withheld_scope: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
-struct User {
-    id: u64,
-    id_str: String,
-    name: String,
-    screen_name: String,
-    location: Option<String>,
+pub struct User {
+    pub id: u64,
+    pub id_str: String,
+    pub name: String,
+    pub screen_name: String,
+    pub location: Option<String>,
     //  derived: Vec<Enrichment>,
-    url: Option<String>,
-    description: Option<String>,
-    protected: bool,
-    verified: bool,
-    followers_count: u32,
-    friends_count: u32,
-    listed_count: u32,
-    favourites_count: u32,
-    statuses_count: u32,
-    created_at: String,
-    profile_banner_url: String,
-    profile_banner_url_https: String,
-    default_profile: bool,
-    default_profile_image: bool,
-    withheld_in_countries: Vec<String>,
-    withheld_scope: String,
+    pub url: Option<String>,
+    pub description: Option<String>,
+    pub protected: bool,
+    pub verified: bool,
+    pub followers_count: u32,
+    pub friends_count: u32,
+    pub listed_count: u32,
+    pub favourites_count: u32,
+    pub statuses_count: u32,
+    pub created_at: String,
+    pub profile_banner_url: Option<String>,
+    pub profile_image_url_https: String,
+    pub default_profile: bool,
+    pub default_profile_image: bool,
+    pub withheld_in_countries: Option<Vec<String>>,
+    pub withheld_scope: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
-struct Coordinates {
-    coordinates: Vec<f64>,
+pub struct Coordinates {
+    pub coordinates: Vec<f64>,
     #[serde(rename = "type")]
-    kind: String,
+    pub kind: String,
 }
 
 #[derive(Debug, Deserialize)]
-struct Place {
-    id: String,
-    url: String,
-    place_type: String,
-    name: String,
-    full_name: String,
-    country_code: String,
-    country: String,
-    bounding_box: BoundingBox,
+pub struct Place {
+    pub id: String,
+    pub url: String,
+    pub place_type: String,
+    pub name: String,
+    pub full_name: String,
+    pub country_code: String,
+    pub country: String,
+    pub bounding_box: BoundingBox,
     //  attributes: No docs?
 }
 
 #[derive(Debug, Deserialize)]
-struct BoundingBox {
-    coordinates: Vec<Vec<Vec<f64>>>,
+pub struct BoundingBox {
+    pub coordinates: Vec<Vec<Vec<f64>>>,
 }
 
 #[derive(Debug, Deserialize)]
-struct Entity {
-    hashtags: Vec<Hashtag>,
-    urls: Vec<Url>,
-    user_mentions: Vec<UserMention>,
-    symbols: Vec<Symbol>,
-    media: Option<Vec<Media>>,
-    polls: Option<Vec<Poll>>,
+pub struct Entity {
+    pub hashtags: Vec<Hashtag>,
+    pub urls: Vec<Url>,
+    pub user_mentions: Vec<UserMention>,
+    pub symbols: Vec<Symbol>,
+    pub media: Option<Vec<Media>>,
+    pub polls: Option<Vec<Poll>>,
 }
 
 #[derive(Debug, Deserialize)]
-struct Hashtag {
-    indices: Vec<u32>,
-    text: String,
+pub struct Hashtag {
+    pub indices: Vec<u32>,
+    pub text: String,
 }
 
 #[derive(Debug, Deserialize)]
-struct Media {
-    display_url: String,
-    expanded_url: String,
-    id: u64,
-    id_str: String,
-    indices: Vec<u32>,
-    media_url: String,
-    media_url_https: String,
-    sizes: Sizes,
-    source_status_id: Option<u64>,
-    source_status_id_str: Option<String>,
+pub struct Media {
+    pub display_url: String,
+    pub expanded_url: String,
+    pub id: u64,
+    pub id_str: String,
+    pub indices: Vec<u32>,
+    pub media_url: String,
+    pub media_url_https: String,
+    pub sizes: Sizes,
+    pub source_status_id: Option<u64>,
+    pub source_status_id_str: Option<String>,
     #[serde(rename="type")]
-    kind: String,
-    url: String,
-    video_info: Option<VideoInfo>,
-    additional_media_info: Option<AdditionalMediaInfo>,
+    pub kind: String,
+    pub url: String,
+    pub video_info: Option<VideoInfo>,
+    pub additional_media_info: Option<AdditionalMediaInfo>,
 }
 
 #[derive(Debug, Deserialize)]
-struct VideoInfo {
-    aspect_ratio: Vec<u32>,
-    duration_millis: u32,
-    variants: Vec<Variant>,
+pub struct VideoInfo {
+    pub aspect_ratio: Vec<u32>,
+    pub duration_millis: Option<u32>,
+    pub variants: Vec<Variant>,
 }
 
 #[derive(Debug, Deserialize)]
-struct Variant {
-    bitrate: Option<u32>,
-    content_type: String,
-    url: String,
+pub struct Variant {
+    pub bitrate: Option<u32>,
+    pub content_type: String,
+    pub url: String,
 }
 
 #[derive(Debug, Deserialize)]
-struct AdditionalMediaInfo {
-    title: String,
-    description: String,
-    embeddable: bool,
-    monetizable: bool,
+pub struct AdditionalMediaInfo {
+    pub title: Option<String>,
+    pub description: Option<String>,
+    pub embeddable: Option<bool>,
+    pub monetizable: bool,
 }
 
 #[derive(Debug, Deserialize)]
-struct Sizes {
-    thumb: Size,
-    large: Size,
-    medium: Size,
-    small: Size,
+pub struct Sizes {
+    pub thumb: Size,
+    pub large: Size,
+    pub medium: Size,
+    pub small: Size,
 }
 
 #[derive(Debug, Deserialize)]
-struct Size {
-    w: u32,
-    h: u32,
-    resize: String,
+pub struct Size {
+    pub w: u32,
+    pub h: u32,
+    pub resize: String,
 }
 
 #[derive(Debug, Deserialize)]
-struct Url {
-    display_url: String,
-    expanded_url: String,
-    indices: Vec<u32>,
-    url: String,
-    unwound: Option<UnwoundUrl>
+pub struct Url {
+    pub display_url: String,
+    pub expanded_url: String,
+    pub indices: Vec<u32>,
+    pub url: String,
+    pub unwound: Option<UnwoundUrl>
 }
 
 #[derive(Debug, Deserialize)]
-struct UnwoundUrl {
-    url: String,
-    status: u32,
-    title: String,
-    description: String,
+pub struct UnwoundUrl {
+    pub url: String,
+    pub status: u32,
+    pub title: String,
+    pub description: String,
 }
 
 #[derive(Debug, Deserialize)]
-struct UserMention {
-    id: u64,
-    id_str: String,
-    indices: Vec<u32>,
-    name: String,
-    screen_name: String,
+pub struct UserMention {
+    pub id: u64,
+    pub id_str: String,
+    pub indices: Vec<u32>,
+    pub name: String,
+    pub screen_name: String,
 }
 
 #[derive(Debug, Deserialize)]
-struct Symbol {
-    indices: Vec<u32>,
-    text: String,
+pub struct Symbol {
+    pub indices: Vec<u32>,
+    pub text: String,
 }
 
 #[derive(Debug, Deserialize)]
-struct Poll {
-    options: Vec<PollOption>,
-    end_datetime: String,
-    duration_minutes: String,
+pub struct Poll {
+    pub options: Vec<PollOption>,
+    pub end_datetime: String,
+    pub duration_minutes: String,
 }
 
 #[derive(Debug, Deserialize)]
-struct PollOption {
-    position: u32,
-    text: String,
+pub struct PollOption {
+    pub position: u32,
+    pub text: String,
 }
 
 #[derive(Debug, Deserialize)]
-struct ExtendedEntity {
-    media: Vec<Media>,
+pub struct ExtendedEntity {
+    pub media: Vec<Media>,
 }
