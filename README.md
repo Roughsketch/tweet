@@ -1,3 +1,5 @@
+[![ci-badge][]][ci] [![docs-badge][]][docs] [![crates.io version]][crates.io link]
+
 tweet
 
 This library is for deserializing data from the Twitter API.
@@ -13,3 +15,10 @@ use tweet::Tweet;
 
 Tweet::from_str(&json)
 ```
+
+[ci]: https://travis-ci.org/Roughsketch/tweet
+[ci-badge]: https://img.shields.io/travis/Roughsketch/tweet.svg?style=flat-square
+[crates.io link]: https://crates.io/crates/tweet
+[crates.io version]: https://img.shields.io/crates/v/tweet.svg?style=flat-square
+[docs]: https://docs.rs/tweet
+[docs-badge]: https://img.shields.io/badge/docs-online-5023dd.svg?style=flat-square
