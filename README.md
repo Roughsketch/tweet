@@ -11,6 +11,7 @@ If there is anything missing feel free to create an issue. I tried to add every 
 ## Example
 
 ```rust
+use std::str::FromStr;
 use tweet::Tweet;
 
 Tweet::from_str(&json)
