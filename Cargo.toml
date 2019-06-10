@@ -1,0 +1,19 @@
+[package]
+name = "tweet"
+version = "0.1.0"
+authors = ["Maid Dog <maiddogsrl@gmail.com>"]
+edition = "2018"
+description = "Library for deserializing JSON data from the Twitter API"
+documentation = "https://docs.rs/tweet"
+homepage = "https://github.com/Roughsketch/tweet"
+repository = "https://github.com/Roughsketch/tweet"
+readme = "README.md"
+keywords = ["twitter", "api", "deserialization", "json"]
+categories = ["parsing"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
