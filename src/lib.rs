@@ -60,7 +60,7 @@ impl Tweet {
 
     /// Determine whether this is a retweet or not.
     pub fn is_retweet(&self) -> bool {
-        self.retweeted
+        self.retweeted_status.is_some()
     }
 
     /// Gathers all media urls from the post into a `Vec`.
