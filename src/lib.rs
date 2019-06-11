@@ -234,10 +234,10 @@ pub struct UnwoundUrl {
 
 #[derive(Debug, Deserialize)]
 pub struct UserMention {
-    pub id: u64,
-    pub id_str: String,
+    pub id: Option<u64>,
+    pub id_str: Option<String>,
     pub indices: Vec<u32>,
-    pub name: String,
+    pub name: Option<String>,
     pub screen_name: String,
 }
 
