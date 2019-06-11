@@ -63,6 +63,16 @@ impl Tweet {
         self.retweeted_status.is_some()
     }
 
+    /// If it's a retweet, the original tweet id is returned. Otherwise
+    /// the current tweet id is returned.
+    pub fn base_id(&self) -> u64 {
+        if let Some(rt) = &self.retweeted_status {
+            return rt.id;
+        }
+
+        return self.id;
+    }
+
     /// Gathers all media urls from the post into a `Vec`.
     /// For videos and gifs this will always have a single
     /// url, but for photos it can be up to 4 max.
