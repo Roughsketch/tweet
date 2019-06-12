@@ -63,6 +63,11 @@ impl Tweet {
         self.retweeted_status.is_some()
     }
 
+    /// Returns true when the tweet has a photo, gif, or video.
+    pub fn has_media(&self) -> bool {
+        self.extended_entities.is_some()
+    }
+
     /// If it's a retweet, the original tweet id is returned. Otherwise
     /// the current tweet id is returned.
     pub fn base_id(&self) -> u64 {
