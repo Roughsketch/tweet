@@ -78,6 +78,11 @@ impl Tweet {
         return self.id;
     }
 
+    /// Creates a direct URL to the status
+    pub fn url(&self) -> String {
+        format!("https://twitter.com/{}/status/{}", self.user.screen_name, self.id)
+    }
+
     /// Gathers all media urls from the post into a `Vec`.
     /// For videos and gifs this will always have a single
     /// url, but for photos it can be up to 4 max.
