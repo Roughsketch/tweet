@@ -87,28 +87,34 @@ impl Tweet {
     /// For videos and gifs this will always have a single
     /// url, but for photos it can be up to 4 max.
     pub fn media_urls(&self) -> Vec<String> {
-        let mut urls = Vec::with_capacity(4);
+        use std::collections::HashSet;
+
+        let mut urls = if let Some(rt) = &self.retweeted_status {
+            rt.media_urls().iter().cloned().collect::<HashSet<_>>()
+        } else {
+            HashSet::new()
+        };
 
         //  Use extended entities to get media
         if let Some(ent) = &self.extended_entities {
             for media in &ent.media {
                 //  If it's a photo, just take the url
                 if media.kind == "photo" {
-                    urls.push(media.media_url_https.clone());
+                    urls.insert(media.media_url_https.clone());
                 } else {
                     //  If it's a video, get the max bitrate variant's url
                     if let Some(vi) = &media.video_info {
                         let max = vi.variants.iter().max_by(|a, b| a.bitrate.cmp(&b.bitrate));
 
                         if let Some(var) = max {
-                            urls.push(var.url.clone());
+                            urls.insert(var.url.clone());
                         }
                     }
                 }
             }
         }
 
-        urls
+        urls.iter().cloned().collect::<Vec<_>>()
     }
 
     /// Gets a list of hashtags associated with the tweet
