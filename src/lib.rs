@@ -110,6 +110,19 @@ impl Tweet {
 
         urls
     }
+
+    /// Gets a list of hashtags associated with the tweet
+    pub fn hashtags(&self) -> Vec<String> {
+        match &self.entities {
+            Some(entities) => {
+                entities.hashtags
+                        .iter()
+                        .map(|ht| ht.text.clone())
+                        .collect::<Vec<_>>()
+            }
+            None => Vec::new(),
+        }
+    }
 }
 
 #[derive(Debug, Deserialize)]
