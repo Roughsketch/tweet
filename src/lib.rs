@@ -124,6 +124,21 @@ impl Tweet {
         format!("https://twitter.com/{}/status/{}", self.user.screen_name, self.id)
     }
 
+    pub fn full_text(&self) -> String {
+        if let Some(ex) = &self.extended_tweet {
+            ex.full_text.clone()
+        } else if self.truncated {
+            //  If truncated, doesn't have extended tweet, and has a retweet
+            //  then take the text from the retweet status
+            match &self.retweeted_status {
+                Some(rt) => rt.text.clone(),
+                None => self.text.clone(),
+            }
+        } else {
+            self.text.clone()
+        }
+    }
+
     /// Gathers all media urls from the post into a `Vec`.
     /// For videos and gifs this will always have a single
     /// url, but for photos it can be up to 4 max.
