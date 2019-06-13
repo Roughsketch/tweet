@@ -37,6 +37,8 @@ pub struct Tweet {
     pub in_reply_to_screen_name: Option<String>,
     /// The user who posted this tweet
     pub user: User,
+    /// If the tweet was truncated because it was longer than 140 chars, this contains the rest of the text
+    pub extended_tweet: Option<ExtendedTweet>,
     /// Represents the geographic location of this tweet as reported by user/client
     pub coordinates: Option<Coordinates>,
     /// The place that this tweet is associated with
@@ -95,6 +97,11 @@ impl Tweet {
     /// Determine whether this is a retweet or not.
     pub fn is_retweet(&self) -> bool {
         self.retweeted_status.is_some()
+    }
+
+    /// Determine whether the tweet is extended or not
+    pub fn is_extended(&self) -> bool {
+        self.extended_tweet.is_some()
     }
 
     /// Returns true when the tweet has a photo, gif, or video.
@@ -211,6 +218,14 @@ pub struct User {
     pub withheld_in_countries: Option<Vec<String>>,
     /// Indicates whether content being withheld is a "user"
     pub withheld_scope: Option<String>,
+}
+
+/// Represents a full tweet text and entities when going over 140 characters
+#[derive(Debug, Deserialize)]
+pub struct ExtendedTweet {
+    full_text: String,
+    display_text_range: (u32, u32),
+    entities: Entity,
 }
 
 /// Represents geographic coordinates
