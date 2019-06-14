@@ -141,6 +141,11 @@ impl Tweet {
         format!("https://twitter.com/{}/status/{}", self.user.screen_name, self.id)
     }
 
+    /// When a tweet is extended it can go over the 140 character limit.
+    /// In such cases, the tweet text field is truncated as noted by the
+    /// truncated flag. This method will check the extended tweet data
+    /// and return either it, the full retweet text if it was truncated
+    /// or the original text field depending on what's appropriate.
     pub fn full_text(&self) -> String {
         if let Some(ex) = &self.extended_tweet {
             ex.full_text.clone()
