@@ -1,8 +1,10 @@
 use chrono::{DateTime, Utc};
+use serde_derive::{Deserialize, Serialize};
 
 use crate::util::datetime::{datefmt_de, datefmt_ser};
+
 /// Represents a twitter user
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct User {
     /// Unique identifier for the user
     pub id: u64,

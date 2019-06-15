@@ -1,4 +1,5 @@
-use serde_derive::Deserialize;
+use chrono::{DateTime, Utc};
+use serde_derive::{Deserialize, Serialize};
 use std::str::FromStr;
 
 use crate::model::coordinates::Coordinates;
@@ -7,6 +8,7 @@ use crate::model::media::MediaType;
 use crate::model::place::Place;
 use crate::model::url::LegacyUrl;
 use crate::model::user::User;
+use crate::util::datetime::{datefmt_de, datefmt_ser};
 
 impl FromStr for Tweet {
     type Err = serde_json::error::Error;
@@ -17,10 +19,11 @@ impl FromStr for Tweet {
 }
 
 /// Represents a tweet
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Tweet {
     /// When the tweet was posted
-    pub created_at: String,
+    #[serde(deserialize_with="datefmt_de", serialize_with="datefmt_ser")]
+    pub created_at: DateTime<Utc>,
     /// The unique id for the tweet
     pub id: u64,
     /// String version of `id`
@@ -210,7 +213,7 @@ impl Tweet {
 }
 
 /// Represents a full tweet text and entities when going over 140 characters
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ExtendedTweet {
     full_text: String,
     display_text_range: (u32, u32),

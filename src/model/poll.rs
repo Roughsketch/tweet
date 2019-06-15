@@ -1,8 +1,10 @@
 use chrono::{DateTime, Utc};
+use serde_derive::{Deserialize, Serialize};
+
 use crate::util::datetime::{datefmt_de, datefmt_ser};
 
 /// Represents a twitter poll
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Poll {
     /// All the options for the poll
     pub options: Vec<PollOption>,
@@ -14,7 +16,7 @@ pub struct Poll {
 }
 
 /// Represents an option in a poll
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct PollOption {
     /// What position in the poll this option has
     pub position: u32,

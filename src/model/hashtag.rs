@@ -1,7 +1,7 @@
-use serde_derive::Deserialize;
+use serde_derive::{Deserialize, Serialize};
 
 /// Represents a hashtag
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Hashtag {
     /// The indices of the hastag in the original tweet message
     pub indices: Vec<u32>,

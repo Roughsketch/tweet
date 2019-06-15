@@ -1,7 +1,7 @@
-use serde_derive::Deserialize;
+use serde_derive::{Deserialize, Serialize};
 
 /// Represents a specific named location corresponding with geo coordinates
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Place {
     /// Unique id representing this place
     pub id: String,
@@ -23,7 +23,7 @@ pub struct Place {
 }
 
 /// Represents a bounding box of geo coordinates
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct BoundingBox {
     pub coordinates: Vec<Vec<(f64, f64)>>,
 }

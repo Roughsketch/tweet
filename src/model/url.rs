@@ -1,7 +1,7 @@
-use serde_derive::Deserialize;
+use serde_derive::{Deserialize, Serialize};
 
 /// Represents a link from a tweet
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Url {
     pub display_url: String,
     pub expanded_url: String,
@@ -10,7 +10,7 @@ pub struct Url {
     pub unwound: Option<UnwoundUrl>
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct UnwoundUrl {
     pub url: String,
     pub status: u32,
@@ -19,7 +19,7 @@ pub struct UnwoundUrl {
 }
 
 /// Represents a link from a tweet
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct LegacyUrl {
     pub display: String,
     pub expanded: String,

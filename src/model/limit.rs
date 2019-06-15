@@ -1,4 +1,4 @@
-use serde_derive::Deserialize;
+use serde_derive::{Deserialize, Serialize};
 use std::str::FromStr;
 
 impl FromStr for Limit {
@@ -9,12 +9,12 @@ impl FromStr for Limit {
     }
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Limit {
     limit: LimitFields,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct LimitFields {
     track: u32,
     timestamp_ms: String,

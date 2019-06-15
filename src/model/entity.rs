@@ -1,4 +1,4 @@
-use serde_derive::Deserialize;
+use serde_derive::{Deserialize, Serialize};
 
 use crate::model::hashtag::Hashtag;
 use crate::model::media::Media;
@@ -8,7 +8,7 @@ use crate::model::url::Url;
 use crate::model::user_mention::UserMention;
 
 /// Contains information on various parsed out pieces of tweets
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Entity {
     /// Collection of hashtags that were included in this tweet
     pub hashtags: Vec<Hashtag>,
@@ -26,7 +26,7 @@ pub struct Entity {
 
 /// When a tweet has more than one image or has a video or gif,
 /// the full media information is sent through an extended entity.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ExtendedEntity {
     /// The media inside the tweet
     pub media: Vec<Media>,

@@ -1,7 +1,7 @@
-use serde_derive::Deserialize;
+use serde_derive::{Deserialize, Serialize};
 
 /// Represents geographic coordinates
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Coordinates {
     /// Latitude and Longitude
     pub coordinates: (f64, f64),
