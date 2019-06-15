@@ -8,13 +8,58 @@ I ended up creating this since I couldn't find a way to deserialize data while u
 
 If there is anything missing feel free to create an issue. I tried to add every field regardless of potential use, but there were some I left out; mainly enrichment stuff, or things with no concrete docs I could find.
 
-## Example
+## Simple example
 
 ```rust
 use std::str::FromStr;
 use tweet::Tweet;
 
 Tweet::from_str(&json)
+```
+
+## Usage with twitter-stream
+```rust
+use twitter_stream::{Token, TwitterStreamBuilder};
+use twitter_stream::rt::{self, Future, Stream};
+use tweet::TwitterResponse;
+
+// Import your keys however you want
+let token = Token::new(
+    dotenv!("TW_API"), dotenv!("TW_SEC"),
+    dotenv!("TW_ACC_KEY"), dotenv!("TW_ACC_SEC"));
+
+let future = TwitterStreamBuilder::filter(token)
+    .timeout(None)
+    .track(Some("cat, dog, rabbit"))
+    .listen().unwrap()
+    .flatten_stream()
+    .for_each(move |json| {
+        //  A twitter stream just sends us raw JSON responses, and those
+        //  responses can contain a Tweet or a Limit payload. TwitterResponse
+        //  encapsulates deserializing this variable payload. Without it there
+        //  is a possibility of trying to deserialize a Limit as a Tweet and
+        //  getting a deserialization error.
+        let tweet = match TwitterResponse::from_str(&json) {
+            //  Return the tweet so we can use it
+            Ok(TwitterResponse::Tweet(tweet)) => tweet,
+            //  Just print out limit information if we get it and return
+            Ok(TwitterResponse::Limit(limit)) => {
+                println!("Got a limit: {:#?}", limit);
+                return Ok(());
+            }
+            //  If something goes wrong, print the error and the payload
+            Err(why) => {
+                println!("Error: {:?}\nPayload: {}", why, json);
+                return Ok(());
+            }
+        };
+        
+        //  Use tweet however you want
+        println!("Tweet URL: {}", tweet.url());
+
+        Ok(())
+    })
+    .map_err(|e| println!("Error: {}", e));
 ```
 
 [ci]: https://travis-ci.org/Roughsketch/tweet
