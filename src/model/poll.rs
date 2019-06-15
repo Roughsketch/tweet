@@ -1,4 +1,5 @@
-use serde_derive::Deserialize;
+use chrono::{DateTime, Utc};
+use crate::util::datetime::{datefmt_de, datefmt_ser};
 
 /// Represents a twitter poll
 #[derive(Debug, Deserialize)]
@@ -6,7 +7,8 @@ pub struct Poll {
     /// All the options for the poll
     pub options: Vec<PollOption>,
     /// When the poll ends
-    pub end_datetime: String,
+    #[serde(deserialize_with="datefmt_de", serialize_with="datefmt_ser")]
+    pub end_datetime: DateTime<Utc>,
     /// How long the poll has been running
     pub duration_minutes: String,
 }

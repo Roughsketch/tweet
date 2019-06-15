@@ -1,5 +1,6 @@
-use serde_derive::Deserialize;
+use chrono::{DateTime, Utc};
 
+use crate::util::datetime::{datefmt_de, datefmt_ser};
 /// Represents a twitter user
 #[derive(Debug, Deserialize)]
 pub struct User {
@@ -33,7 +34,8 @@ pub struct User {
     /// How many tweets and retweets this user has
     pub statuses_count: u32,
     /// When the account was created
-    pub created_at: String,
+    #[serde(deserialize_with="datefmt_de", serialize_with="datefmt_ser")]
+    pub created_at: DateTime<Utc>,
     /// User's uploaded profile banner
     pub profile_banner_url: Option<String>,
     /// User's uploaded profile image
