@@ -151,15 +151,13 @@ impl Tweet {
     /// or the original text field depending on what's appropriate.
     pub fn full_text(&self) -> String {
         if let Some(ex) = &self.extended_tweet {
+            //  If base tweet is extended, get that text
             ex.full_text.clone()
-        } else if self.truncated {
-            //  If truncated, doesn't have extended tweet, and has a retweet
-            //  then take the text from the retweet status
-            match &self.retweeted_status {
-                Some(rt) => rt.text.clone(),
-                None => self.text.clone(),
-            }
+        } else if let Some(rt) = &self.retweeted_status {
+            //  If this is a retweet, get its full text
+            rt.full_text().clone()
         } else {
+            //  Otherwise return base text
             self.text.clone()
         }
     }
