@@ -126,7 +126,23 @@ impl Tweet {
 
     /// Returns true when the tweet has a photo, gif, or video.
     pub fn has_media(&self) -> bool {
-        self.extended_entities.is_some()
+        if self.extended_entities.is_some() {
+            return true;
+        }
+
+        if let Some(ext) = &self.extended_tweet {
+            if ext.entities.media.is_some() {
+                return true;
+            }
+        }
+
+        if let Some(rt) = &self.retweeted_status {
+            if rt.has_media() {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /// If it's a retweet, the original tweet id is returned. Otherwise
