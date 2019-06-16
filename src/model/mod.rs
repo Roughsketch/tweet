@@ -1,15 +1,15 @@
-pub mod coordinates;
-pub mod entity;
-pub mod hashtag;
-pub mod limit;
-pub mod media;
-pub mod place;
-pub mod poll;
-pub mod symbol;
-pub mod tweet;
-pub mod url;
-pub mod user_mention;
-pub mod user;
+mod coordinates;
+mod entity;
+mod hashtag;
+mod limit;
+mod media;
+mod place;
+mod poll;
+mod symbol;
+mod tweet;
+mod url;
+mod user_mention;
+mod user;
 
 pub use coordinates::Coordinates;
 pub use entity::{Entity, ExtendedEntity};

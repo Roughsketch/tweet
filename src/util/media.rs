@@ -1,5 +1,5 @@
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
-use crate::model::media::MediaType;
+use crate::MediaType;
 
 impl Serialize for MediaType {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
