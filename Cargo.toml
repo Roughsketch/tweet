@@ -1,6 +1,6 @@
 [package]
 name = "tweet"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Maid Dog <maiddogsrl@gmail.com>"]
 edition = "2018"
 description = "Library for deserializing JSON data from the Twitter API"
