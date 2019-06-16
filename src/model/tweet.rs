@@ -170,6 +170,9 @@ impl Tweet {
     pub fn media_urls(&self) -> Vec<String> {
         use std::collections::HashSet;
 
+        //  Sometimes the original tweet media and current tweet
+        //  media are different. This combines them all into a
+        //  set so that we don't miss anything.
         let mut urls = if let Some(rt) = &self.retweeted_status {
             rt.media_urls().iter().cloned().collect::<HashSet<_>>()
         } else {
