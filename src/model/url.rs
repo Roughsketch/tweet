@@ -10,11 +10,17 @@ pub struct Url {
     pub unwound: Option<UnwoundUrl>
 }
 
+/// Holds an unshortened link and some metadata about
+/// its content.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct UnwoundUrl {
+    /// Long url of a shortened one contained in the tweet
     pub url: String,
+    /// HTTP status of the url
     pub status: u32,
+    /// Title of the destination
     pub title: String,
+    /// Description of the destination
     pub description: String,
 }
 

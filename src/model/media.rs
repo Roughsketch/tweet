@@ -52,39 +52,63 @@ impl Media {
         return None;
     }
 }
+
+/// Stores information about a video media object
 #[derive(Debug, Deserialize, Serialize)]
 pub struct VideoInfo {
-    pub aspect_ratio: Vec<u32>,
+    /// What aspect ratio the video has
+    pub aspect_ratio: (u32, u32),
+    /// How long the video lasts in milliseconds
     pub duration_millis: Option<u32>,
+    /// A list of quality variants available for this video
     pub variants: Vec<Variant>,
 }
 
+/// Holds information about a videos quality and location
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Variant {
+    /// What bitrate the video has. The higher the bitrate,
+    /// the higher the quality is.
     pub bitrate: Option<u32>,
+    /// What type of content this variant contains
     pub content_type: String,
+    /// The location of the video
     pub url: String,
 }
 
+/// Holds additional information about a piece of media
 #[derive(Debug, Deserialize, Serialize)]
 pub struct AdditionalMediaInfo {
+    /// Title of the content
     pub title: Option<String>,
+    /// A description of the content
     pub description: Option<String>,
+    /// Whether or not this content can be embedded
     pub embeddable: Option<bool>,
+    /// Whether or not this content can be monetized
     pub monetizable: bool,
 }
 
+/// Stores information about the various sizes available
+/// for a piece of media in some standard forms.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Sizes {
+    /// Thumbnail size information
     pub thumb: Size,
+    /// Largest available size information
     pub large: Size,
+    /// Medium size information
     pub medium: Size,
+    /// Small size information
     pub small: Size,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Size {
+    /// Width
     pub w: u32,
+    /// Height
     pub h: u32,
+    /// The resizing method used to get these values
     pub resize: String,
 }
