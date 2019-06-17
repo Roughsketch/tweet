@@ -37,7 +37,7 @@ impl Media {
     pub fn url(&self) -> Option<String> {
         //  If it's a photo, just take the url
         if self.kind == MediaType::Photo {
-            return self.media_url_https.clone();
+            return Some(self.media_url_https.clone());
         } 
         
         if let Some(vi) = &self.video_info {
@@ -45,7 +45,7 @@ impl Media {
             let max = vi.variants.iter().max_by(|a, b| a.bitrate.cmp(&b.bitrate));
 
             if let Some(var) = max {
-                return var.url.clone();
+                return Some(var.url.clone());
             }
         }
 

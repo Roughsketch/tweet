@@ -196,7 +196,7 @@ impl Tweet {
         if let Some(ent) = &self.extended_entities {
             for media in &ent.media {
                 if let Some(url) = media.url() {
-                    urls.insert();
+                    urls.insert(url);
                 }
             }
         }
@@ -206,7 +206,7 @@ impl Tweet {
             if let Some(media_entries) = &ext.entities.media {
                 for media in media_entries {
                     if let Some(url) = media.url() {
-                        urls.insert();
+                        urls.insert(url);
                     }
                 }
             }
