@@ -29,6 +29,29 @@ pub struct Media {
     pub additional_media_info: Option<AdditionalMediaInfo>,
 }
 
+impl Media {
+    /// Returns the URL associated with this media object
+    /// 
+    /// This should ideally only return None if Twitter
+    /// changes its API in the future.
+    pub fn url(&self) -> Option<String> {
+        //  If it's a photo, just take the url
+        if self.kind == MediaType::Photo {
+            return self.media_url_https.clone();
+        } 
+        
+        if let Some(vi) = &self.video_info {
+            //  If it's a video, get the max bitrate variant's url
+            let max = vi.variants.iter().max_by(|a, b| a.bitrate.cmp(&b.bitrate));
+
+            if let Some(var) = max {
+                return var.url.clone();
+            }
+        }
+
+        return None;
+    }
+}
 #[derive(Debug, Deserialize, Serialize)]
 pub struct VideoInfo {
     pub aspect_ratio: Vec<u32>,

@@ -4,7 +4,6 @@ use std::str::FromStr;
 
 use crate::model::coordinates::Coordinates;
 use crate::model::entity::{Entity, ExtendedEntity};
-use crate::model::media::MediaType;
 use crate::model::place::Place;
 use crate::model::url::LegacyUrl;
 use crate::model::user::User;
@@ -196,17 +195,18 @@ impl Tweet {
         //  Use extended entities to get media
         if let Some(ent) = &self.extended_entities {
             for media in &ent.media {
-                //  If it's a photo, just take the url
-                if media.kind == MediaType::Photo {
-                    urls.insert(media.media_url_https.clone());
-                } else {
-                    //  If it's a video, get the max bitrate variant's url
-                    if let Some(vi) = &media.video_info {
-                        let max = vi.variants.iter().max_by(|a, b| a.bitrate.cmp(&b.bitrate));
+                if let Some(url) = media.url() {
+                    urls.insert();
+                }
+            }
+        }
 
-                        if let Some(var) = max {
-                            urls.insert(var.url.clone());
-                        }
+        //  If this is an extended tweet, check its own media entries
+        if let Some(ext) = &self.extended_tweet {
+            if let Some(media_entries) = &ext.entities.media {
+                for media in media_entries {
+                    if let Some(url) = media.url() {
+                        urls.insert();
                     }
                 }
             }
